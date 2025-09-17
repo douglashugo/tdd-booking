@@ -8,8 +8,8 @@ export class Booking {
   private readonly user: User;
   private readonly dateRange: DateRange;
   private readonly guestCount: number;
-  private readonly status: 'CONFIRMED' | 'CANCELLED' = 'CONFIRMED';
-  private readonly totalPrice: number;
+  private status: 'CONFIRMED' | 'CANCELED' = 'CONFIRMED';
+  private totalPrice: number;
 
   constructor(
     id: string,
@@ -58,11 +58,28 @@ export class Booking {
     return this.guestCount;
   }
 
-  getStatus(): 'CONFIRMED' | 'CANCELLED' {
+  getStatus(): 'CONFIRMED' | 'CANCELED' {
     return this.status;
   }
 
   getTotalPrice(): number {
-    return this.property.calculateTotalPrice(this.dateRange);
+    return this.totalPrice;
+  }
+
+  cancel(currentDate: Date): void {
+    if (this.status === 'CANCELED') {
+      throw new Error("A reservation has already been canceled");
+    }
+    this.status = 'CANCELED';
+
+    const checkInDate = this.dateRange.getStartDate();
+    const differenceInDays = checkInDate.getTime() - currentDate.getTime()
+    const daysUntilCheckIn = Math.ceil(differenceInDays / (1000 * 3600 * 24));
+
+    if (daysUntilCheckIn > 7) {
+      this.totalPrice = 0
+    } else if (daysUntilCheckIn >= 1) {
+      this.totalPrice *= 0.5;
+    }
   }
 }

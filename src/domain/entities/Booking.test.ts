@@ -49,4 +49,56 @@ describe("Booking Entinty", () => {
       new Booking('2', property, user, dataRange2, 4);
     }).toThrow("Property is not available in the selected period");
   })
+
+  it("should cancel a reservation without a refund when there is less than 1 day left until check-in", () => {
+    const property = new Property('1', 'Casa', 'Um casa no mato', 4, 300);
+    const user = new User('1', 'João');
+    const dataRange = new DateRange(new Date('2023-10-01'), new Date('2023-10-07'));
+
+    const booking = new Booking('1', property, user, dataRange, 4);
+    const currentDate = new Date('2023-10-01');
+    booking.cancel(currentDate)
+
+    expect(booking.getStatus()).toBe('CANCELED');
+    expect(booking.getTotalPrice()).toBe(300 * 6)
+  })
+
+  it("should cancel a reservation for a full refund when the request is more than 7 days before check-in", () => {
+    const property = new Property('1', 'Casa', 'Um casa no mato', 4, 300);
+    const user = new User('1', 'João');
+    const dataRange = new DateRange(new Date('2023-10-01'), new Date('2023-10-10'));
+
+    const booking = new Booking('1', property, user, dataRange, 4);
+    const currentDate = new Date('2023-09-21');
+    booking.cancel(currentDate)
+
+    expect(booking.getStatus()).toBe('CANCELED');
+    expect(booking.getTotalPrice()).toBe(0)
+  })
+
+  it("should cancel a reservation with a partial refund when the request is between 1 and 7 days before check-in", () => {
+    const property = new Property('1', 'Casa', 'Um casa no mato', 4, 300);
+    const user = new User('1', 'João');
+    const dataRange = new DateRange(new Date('2023-10-01'), new Date('2023-10-05'));
+
+    const booking = new Booking('1', property, user, dataRange, 4);
+    const currentDate = new Date('2023-09-28');
+    booking.cancel(currentDate)
+
+    expect(booking.getStatus()).toBe('CANCELED');
+    expect(booking.getTotalPrice()).toBe(300 * 0.5 * 4)
+  })
+
+  it("should throw an error if you try to cancel a reservation and it is already canceled", () => {
+    const property = new Property('1', 'Casa', 'Um casa no mato', 4, 300);
+    const user = new User('1', 'João');
+    const dataRange = new DateRange(new Date('2023-10-01'), new Date('2023-10-05'));
+
+    const booking = new Booking('1', property, user, dataRange, 4);
+    const currentDate = new Date('2023-09-28');
+    booking.cancel(currentDate)
+    expect(() => {
+      booking.cancel(currentDate)
+    }).toThrow("A reservation has already been canceled");
+  })
 })
