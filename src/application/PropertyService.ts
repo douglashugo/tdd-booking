@@ -4,6 +4,6 @@ export class PropertyService {
   constructor(private propertyRepository: PropertyRepository) {}
 
   async findPropertyById(id: string) {
-    return this.propertyRepository.findById(id);
+    return this.propertyRepository.findPropertyById(id);
   }
 }

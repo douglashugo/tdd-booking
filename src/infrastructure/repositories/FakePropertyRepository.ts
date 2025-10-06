@@ -7,7 +7,7 @@ export class FakePropertyRepository implements PropertyRepository {
     new Property("2", "Casa de praia", "Casa com vista para o mar", 6, 300),
   ];
 
-  async findById(id: string): Promise<Property | null> {
+  async findPropertyById(id: string): Promise<Property | null> {
     return this.properties.find((property) => property.getId() === id) || null;
   }
   async save(property: Property): Promise<void> {
