@@ -1,6 +1,6 @@
-import { User } from "../domain/entities/User";
-import { UserRepository } from "../domain/repositories/UserRepository";
-import { FakeUserRepository } from "../infrastructure/repositories/FakeUserRepository";
+import { User } from "../../domain/entities/User";
+import { UserRepository } from "../../domain/repositories/UserRepository";
+
 
 export class UserService {
 

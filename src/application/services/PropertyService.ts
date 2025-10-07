@@ -1,9 +1,9 @@
-import { PropertyRepository } from "../domain/repositories/PropertyRepository";
+import { PropertyRepository } from "../../domain/repositories/PropertyRepository";
 
 export class PropertyService {
   constructor(private propertyRepository: PropertyRepository) {}
 
   async findPropertyById(id: string) {
-    return this.propertyRepository.findPropertyById(id);
+    return this.propertyRepository.findById(id);
   }
 }

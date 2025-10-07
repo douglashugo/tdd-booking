@@ -35,6 +35,7 @@ export class Booking {
     this.dateRange = dateRange;
     this.guestCount = guestCount;
     this.totalPrice = property.calculateTotalPrice(dateRange);
+    this.status = 'CONFIRMED';
 
     property.addBooking(this);
   }

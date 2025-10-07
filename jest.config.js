@@ -1,6 +1,6 @@
 module.exports = {
   preset: "ts-jest",
-  testEnviroment: "node",
+  testEnvironment: "node",
   testMatch: ["**/*.test.ts"],
   moduleFileExtensions: ["ts", "js"]
 };
