@@ -2,11 +2,13 @@ import { DateRange } from "../values-objects/DateRange";
 import { User } from "./User";
 import { Property } from "./Property";
 import { RefundRuleFactory } from "../cancelation/RefundRuleFactory";
+import { FullRefund } from "../cancelation/FullRefund";
+import { PartialRefund } from "../cancelation/PartialRefund";
 
 export class Booking {
   private readonly id: string;
   private readonly property: Property;
-  private readonly user: User;
+  private readonly guest: User;
   private readonly dateRange: DateRange;
   private readonly guestCount: number;
   private status: 'CONFIRMED' | 'CANCELED' = 'CONFIRMED';
@@ -15,7 +17,7 @@ export class Booking {
   constructor(
     id: string,
     property: Property,
-    user: User,
+    guest: User,
     dateRange: DateRange,
     guestCount: number
   ) {
@@ -31,7 +33,7 @@ export class Booking {
 
     this.id = id;
     this.property = property;
-    this.user = user;
+    this.guest = guest;
     this.dateRange = dateRange;
     this.guestCount = guestCount;
     this.totalPrice = property.calculateTotalPrice(dateRange);
@@ -49,7 +51,7 @@ export class Booking {
   }
 
   getUser(): User {
-    return this.user;
+    return this.guest;
   }
 
   getDateRange(): DateRange {
@@ -68,12 +70,15 @@ export class Booking {
     return this.totalPrice;
   }
 
+  getGuest(): User {
+    return this.guest;
+  }
+
   cancel(currentDate: Date): void {
     if (this.status === 'CANCELED') {
       throw new Error("A reservation has already been canceled");
     }
     
-
     const checkInDate = this.dateRange.getStartDate();
     const differenceInDays = checkInDate.getTime() - currentDate.getTime()
     const daysUntilCheckIn = Math.ceil(differenceInDays / (1000 * 3600 * 24));

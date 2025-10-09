@@ -10,9 +10,6 @@ export class Property {
     private readonly maxGuests: number,
     private readonly basePricePerNight: number    
   ) {
-    if (!id) {
-      throw new Error('Id is required');
-    }
     if (!name) {
       throw new Error('Name is required');
     }
@@ -71,9 +68,5 @@ export class Property {
 
   addBooking(booking: Booking): void {
     this.bookings.push(booking);
-  }
-
-  getBookings(): Booking[] {
-    return [...this.bookings];
   }
 }

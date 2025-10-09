@@ -31,7 +31,7 @@ describe("PropertyService", () => {
         )
         await fakePropertyRepository.save(newProperty as any);
 
-        const property = await fakePropertyRepository.findPropertyById("3");
+        const property = await fakePropertyRepository.findById("3");
 
         expect(property?.getId()).toBe("3");
         expect(property?.getName()).toBe("Test Property");
