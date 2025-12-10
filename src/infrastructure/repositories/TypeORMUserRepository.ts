@@ -10,10 +10,8 @@ export class TypeORMUserRepository implements UserRepository {
         this.repository = repository;
     }
     async save(user: User): Promise<void> {
-        const entity = new UserEntity();
-        entity.id = user.getId();
-        entity.name = user.getName();
-        await this.repository.save(entity);
+        const userEntity = UserMapper.toPersistence(user);
+        await this.repository.save(userEntity);
     }
     async findById(id: string): Promise<User | null> {
         const userEntity = await this.repository.findOne({ where: { id } });
