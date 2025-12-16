@@ -1,11 +1,9 @@
 import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from "typeorm";
 import { PropertyEntity } from "./PropertyEntity";
-import { Property } from "../../../domain/entities/Property";
 import { UserEntity } from "./UserEntity";
 
 @Entity("bookings")
 export class BookingEntity {
-    [x: string]: any;
     @PrimaryColumn("uuid")
     id!: string;
 
@@ -14,6 +12,7 @@ export class BookingEntity {
     })
 
     @JoinColumn({ name: "property_id" })
+    property!: PropertyEntity;
 
     @ManyToOne(() => UserEntity, { nullable: false})
 
@@ -31,4 +30,7 @@ export class BookingEntity {
 
     @Column({ type: "decimal", name: "total_price" })
     totalPrice!: number;
+
+    @Column()
+    status!: "CONFIRMED" | "CANCELED";
 }

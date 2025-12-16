@@ -5,7 +5,7 @@ import { BookingEntity } from "../entities/BookingEntity";
 import { PropertyMapper } from "./PropertyMapper";
 import { UserMapper } from "./UserMapper";
 
-export class BookingqMapper {
+export class BookingMapper {
     static toDomain(entity: BookingEntity, property?: Property): Booking {
         
         const guest = UserMapper.toDomain(entity.guest);
