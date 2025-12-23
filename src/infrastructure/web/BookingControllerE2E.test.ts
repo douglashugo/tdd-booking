@@ -1,29 +1,31 @@
 import express from "express";
+import request from "supertest";
 import { DataSource } from "typeorm";
 import { TypeORMBookingRepository } from "../repositories/TypeORMBookingRepository";
 import { TypeORMPropertyRepository } from "../repositories/TypeORMPropertyRepository";
 import { TypeORMUserRepository } from "../repositories/TypeORMUserRepository";
 import { BookingService } from "../../application/services/BookingService";
 import { UserService } from "../../application/services/UserService";
-import { BookingController } from "./BookingController";
 import { BookingEntity } from "../persistence/entities/BookingEntity";
 import { PropertyEntity } from "../persistence/entities/PropertyEntity";
 import { UserEntity } from "../persistence/entities/UserEntity";
 import { PropertyService } from "../../application/services/PropertyService";
+import { BookingController } from "./BookingController";
 
 const app = express();
 app.use(express.json());
 
-let dataSource = DataSource;
+let dataSource: DataSource;
 let bookingRepository: TypeORMBookingRepository;
 let propertyRepository: TypeORMPropertyRepository;
 let userRepository: TypeORMUserRepository;
 let bookingService: BookingService;
+let propertyService: PropertyService;
 let userService: UserService;
 let bookingController: BookingController;
 
 beforeAll(async () => {
-  dataSource = new DataSource({
+  dataSource = new DataSource({ 
     type: "sqlite",
     database: ":memory:",
     dropSchema: true,
@@ -58,9 +60,9 @@ beforeAll(async () => {
     bookingController.createBooking(req, res).catch((err) => next(err));
   });
 
-  app.post("/bookings/:id/cancel", (req, res, next) => {
-    bookingController.cancelBooking(req, res).catch((err) => next(err));
-  });
+  // app.post("/bookings/:id/cancel", (req, res, next) => {
+  //   bookingController.cancelBooking(req, res).catch((err) => next(err));
+  // });
   
 });
 
@@ -91,4 +93,19 @@ describe("BookingController E2E", () => {
             name: "Test User",
         });
     });
+
+    it("deve criar uma reserva com sucesso", async () =>{
+        const response = await request(app).post("/bookings").send({
+            propertyId: "prop1",
+            userId: "user1",
+            startDate: "2024-07-01",
+            endDate: "2024-07-05",
+            guestCount: 2,
+        });
+
+        expect(response.status).toBe(201);
+        expect(response.body.message).toBe("Reserva criada com sucesso");
+        expect(response.body.booking).toHaveProperty("id");
+        expect(response.body.booking).toHaveProperty("totalPrice");
+    })
 });
