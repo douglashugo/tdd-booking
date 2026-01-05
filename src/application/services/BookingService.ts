@@ -46,7 +46,7 @@ export class BookingService {
     const booking = await this.bookingRepository.findById(bookingId);
 
     if (!booking) {
-      throw new Error("Reserva não encontrada.");
+      throw new Error("Booking not found.");
     }
 
     booking?.cancel(new Date());

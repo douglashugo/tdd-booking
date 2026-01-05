@@ -3,8 +3,8 @@ import { PropertyRepository } from "../../domain/repositories/PropertyRepository
 
 export class FakePropertyRepository implements PropertyRepository {
   private properties: Property[] = [
-    new Property("1", "Apartamento", "Apartamento moderno", 4, 100),
-    new Property("2", "Casa de praia", "Casa com vista para o mar", 6, 200),
+    new Property("1", "Apartment", "Modern apartment", 4, 100),
+    new Property("2", "House by the Beach", "House with ocean view", 6, 200),
   ];
 
   async findById(id: string): Promise<Property | null> {

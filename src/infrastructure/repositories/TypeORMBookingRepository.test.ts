@@ -31,14 +31,14 @@ describe("TyperORMBookingRepository", () => {
     await dataSource.destroy();
   });
 
-  it("deve salvar uma reserva com sucesso", async () => {
+  it("should save a booking successfully", async () => {
     const propertyRepository = dataSource.getRepository(PropertyEntity);
     const userProperty = dataSource.getRepository(UserEntity);
 
     const propertyEntity = propertyRepository.create({
       id: "1",
-      name: "Casa na Praia",
-      description: "Vista para o mar",
+      name: "House by the Beach",
+      description: "Sea view",
       maxGuests: 6,
       basePricePerNight: 200,
     });
@@ -46,8 +46,8 @@ describe("TyperORMBookingRepository", () => {
 
     const property = new Property(
       "1",
-      "Casa na Praia",
-      "Vista para o mar",
+      "House by the Beach",
+      "Sea view",
       6,
       200
     );
@@ -74,19 +74,19 @@ describe("TyperORMBookingRepository", () => {
     expect(savedBooking?.getGuest().getId()).toBe("1");
   });
 
-  it("deve retornar null ao buscar uma reserva inexistente", async () => {
+  it("should return null when searching for a non-existent booking", async () => {
     const savedBooking = await bookingRepository.findById("999");
     expect(savedBooking).toBeNull();
   });
 
-  it("deve salvar uma reserva com sucesso fazendo um cancelamento posterior", async () => {
+  it("should save a booking successfully and cancel it later", async () => {
     const propertyRepository = dataSource.getRepository(PropertyEntity);
     const userProperty = dataSource.getRepository(UserEntity);
 
     const propertyEntity = propertyRepository.create({
       id: "1",
-      name: "Casa na Praia",
-      description: "Vista para o mar",
+      name: "House by the Beach",
+      description: "Sea view",
       maxGuests: 6,
       basePricePerNight: 200,
     });
@@ -94,8 +94,8 @@ describe("TyperORMBookingRepository", () => {
 
     const property = new Property(
       "1",
-      "Casa na Praia",
-      "Vista para o mar",
+      "House by the Beach",
+      "Sea view",
       6,
       200
     );

@@ -13,6 +13,9 @@ export class Property {
     if (!name) {
       throw new Error('Name is required');
     }
+    if (!id) {
+      throw new Error('ID is required');
+    }
     if (maxGuests <= 0) {
       throw new Error('Max guests must be greater than zero');
     }

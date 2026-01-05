@@ -29,11 +29,11 @@ describe("TyperORMPropertyRepository", () => {
         await dataSource.destroy();
     });
 
-    it("deve salvar uma propriedade com sucesso", async() => {
+    it("should save a property successfully", async() => {
         const property = new Property(
             "1",
-            "Casa na Praia",
-            "Vista para o mar",
+            "House by the Beach",
+            "Sea view",
             6,
             200
         );
@@ -45,11 +45,11 @@ describe("TyperORMPropertyRepository", () => {
         expect(savedProperty?.id).toBe("1");
     });
 
-    it("deve retornar uma propriedade com ID válido", async() => {
+    it("should return a property with a valid ID", async() => {
         const property = new Property(
             "1",
-            "Casa na Praia",
-            "Vista para o mar",
+            "House by the Beach",
+            "Sea view",
             6,
             200
         );
@@ -59,10 +59,10 @@ describe("TyperORMPropertyRepository", () => {
         const savedProperty = await propertyRepository.findById("1");
         expect(savedProperty).not.toBeNull();
         expect(savedProperty?.getId()).toBe("1");
-        expect(savedProperty?.getName()).toBe("Casa na Praia");
+        expect(savedProperty?.getName()).toBe("House by the Beach");
     });
 
-    it("deve retornar null ao buscar uma propriedade inexistente", async() => {
+    it("should return null when searching for a non-existent property", async() => {
         const property = await propertyRepository.findById("999");
         expect(property).toBeNull();
     });

@@ -33,7 +33,7 @@ describe("BookingService", () => {
     );
   });
 
-  it("deve criar uma reserva com sucesso usando repositório fake", async () => {
+  it("should create a booking successfully using a fake repository", async () => {
     const mockProperty = {
       getId: jest.fn().mockReturnValue("1"),
       isAvailable: jest.fn().mockReturnValue(true),
@@ -68,7 +68,7 @@ describe("BookingService", () => {
     expect(savedBooking?.getId()).toBe(result.getId());
   });
 
-  it("deve lançar erro se a propriedade não for encontrada", async () => {
+  it("should throw error if property is not found", async () => {
     mockPropertyService.findPropertyById.mockResolvedValue(null);
 
     const bookingDTO: CreateBookingDTO = {
@@ -84,7 +84,8 @@ describe("BookingService", () => {
     );
   });
 
-  it("deve lançar erro se o usuário não for encontrado", async () => {
+  
+  it("should throw error if user is not found", async () => {
     const mockProperty = {
       getId: jest.fn().mockReturnValue("1"),
     } as any;
@@ -105,7 +106,7 @@ describe("BookingService", () => {
     );
   });
 
-  it("deve lançar erro ao tentar criar reserva para um período já reservado", async () => {
+  it("should throw error if property is not available in the select period", async () => {
     const mockProperty = {
       getId: jest.fn().mockReturnValue("1"),
       isAvailable: jest.fn().mockReturnValue(true),
@@ -141,7 +142,7 @@ describe("BookingService", () => {
     );
   });
 
-  it("deve cancelar uma reserva existente usando um repositório fake", async () => {
+  it("should cancel an existing booking using a fake repository", async () => {
     const mockProperty = {
       getId: jest.fn().mockReturnValue("1"),
       isAvailable: jest.fn().mockReturnValue(true),

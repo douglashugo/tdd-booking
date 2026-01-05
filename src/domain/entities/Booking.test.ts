@@ -5,7 +5,7 @@ import { Booking } from "./Booking";
 
 describe("Booking Entinty", () => {
   it("should create instance the Booking with all atributes", () => {
-    const property = new Property('1', 'Casa', 'Um casa no mato', 4, 200);
+    const property = new Property('1', 'House', 'A house in the middle in nature', 4, 200);
     const user = new User('1', 'João');
     const dataRange = new DateRange(new Date('2023-10-10'), new Date('2023-10-16'));
     const booking = new Booking('1', property, user, dataRange, 2);
@@ -18,7 +18,7 @@ describe("Booking Entinty", () => {
   });
 
   it("should throw an error when trying to book a number of guests above the maximum allowed", () => {
-    const property = new Property('1', 'Casa', 'Um casa no mato', 4, 200);
+    const property = new Property('1', 'House', 'A house in the middle in nature', 4, 200);
     const user = new User('1', 'João');
     const dataRange = new DateRange(new Date('2023-10-10'), new Date('2023-10-15'));
 
@@ -28,7 +28,7 @@ describe("Booking Entinty", () => {
   })
 
   it("should calculate the total price with discount", () => {
-    const property = new Property('1', 'Casa', 'Um casa no mato', 4, 300);
+    const property = new Property('1', 'House', 'A house in the middle in nature', 4, 300);
     const user = new User('1', 'João');
     const dataRange = new DateRange(new Date('2023-10-01'), new Date('2023-10-10'));
 
@@ -38,7 +38,7 @@ describe("Booking Entinty", () => {
   })
 
   it("should check if property is available in the selected period", () => {
-    const property = new Property('1', 'Casa', 'Um casa no mato', 4, 300);
+    const property = new Property('1', 'House', 'A house in the middle in nature', 4, 300);
     const user = new User('1', 'João');
     const dataRange = new DateRange(new Date('2023-10-01'), new Date('2023-10-10'));
 
@@ -51,7 +51,7 @@ describe("Booking Entinty", () => {
   })
 
   it("should cancel a reservation without a refund when there is less than 1 day left until check-in", () => {
-    const property = new Property('1', 'Casa', 'Um casa no mato', 4, 300);
+    const property = new Property('1', 'House', 'A house in the middle in nature', 4, 300);
     const user = new User('1', 'João');
     const dataRange = new DateRange(new Date('2023-10-01'), new Date('2023-10-07'));
 
@@ -64,7 +64,7 @@ describe("Booking Entinty", () => {
   })
 
   it("should cancel a reservation for a full refund when the request is more than 7 days before check-in", () => {
-    const property = new Property('1', 'Casa', 'Um casa no mato', 4, 300);
+    const property = new Property('1', 'House', 'A house in the middle in nature', 4, 300);
     const user = new User('1', 'João');
     const dataRange = new DateRange(new Date('2023-10-01'), new Date('2023-10-10'));
 
@@ -77,7 +77,7 @@ describe("Booking Entinty", () => {
   })
 
   it("should cancel a reservation with a partial refund when the request is between 1 and 7 days before check-in", () => {
-    const property = new Property('1', 'Casa', 'Um casa no mato', 4, 300);
+    const property = new Property('1', 'House', 'A house in the middle in nature', 4, 300);
     const user = new User('1', 'João');
     const dataRange = new DateRange(new Date('2023-10-01'), new Date('2023-10-05'));
 
@@ -90,7 +90,7 @@ describe("Booking Entinty", () => {
   })
 
   it("should throw an error if you try to cancel a reservation and it is already canceled", () => {
-    const property = new Property('1', 'Casa', 'Um casa no mato', 4, 300);
+    const property = new Property('1', 'House', 'A house in the middle in nature', 4, 300);
     const user = new User('1', 'João');
     const dataRange = new DateRange(new Date('2023-10-01'), new Date('2023-10-05'));
 

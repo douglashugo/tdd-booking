@@ -9,19 +9,19 @@ describe("PropertyService", () => {
         fakePropertyRepository = new FakePropertyRepository();
         propertyService = new PropertyService(fakePropertyRepository);
     });
-    it("deve retornar null quando ID passado for inválido", async () => {
+    it("should return null when ID passed is invalid", async () => {
         const property = await propertyService.findPropertyById("999");
         expect(property).toBeNull();
-    });
+    }); 
 
-    it("deve retornar uma propriedade quando um ID válido for fornecido", async () => {
+    it("should return a property when a valid ID is provided", async () => {
         const property = await propertyService.findPropertyById("1");
         expect(property?.getId()).toBe("1");
-        expect(property?.getName()).toBe("Apartamento");
+        expect(property?.getName()).toBe("Apartment");
         expect(property).not.toBeNull();
     });
 
-    it("deve salvar uma propriedade com sucesso usando o repositório fake e buscando novamente", async () => {
+    it("should save a property successfully using the fake repository and searching again", async () => {
         const newProperty = new Property (
             "3",
             "Test Property",

@@ -26,7 +26,7 @@ describe("TyperORMRepository", () => {
     await dataSource.destroy();
   });
 
-  it("deve salvar um usuário no banco de dados", async () => {
+  it("should save a user in the database", async () => {
     const user = new User("1", "Jhon Doe");
     await userRepository.save(user);
 
@@ -36,7 +36,7 @@ describe("TyperORMRepository", () => {
     expect(savedUser?.name).toBe("Jhon Doe");
   });
 
-  it("deve retornar um usuário quando um ID válido for fornecido", async () => {
+  it("should return a user when a valid ID is provided", async () => {
     const user = new User("1", "Jhon Doe");
     await userRepository.save(user);
 
@@ -46,7 +46,7 @@ describe("TyperORMRepository", () => {
     expect(savedUser?.getName()).toBe("Jhon Doe");
   });
 
-  it("deve retornar null ao retornar um usuário inexistente", async () => {
+  it("should return null when searching for a non-existing user", async () => {
     const user = await userRepository.findById("999");
     expect(user).toBeNull();
   });

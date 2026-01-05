@@ -10,10 +10,7 @@ export class DateRange {
   }
 
   private validateDates(startDate: Date, endDate: Date): void {
-    if (endDate === startDate) {
-      throw new Error('Start date and end date cannot be the same')
-    } 
-    if (endDate < startDate) {
+    if (endDate <= startDate) {
       throw new Error('End date must be greater than start date')
     }
   }

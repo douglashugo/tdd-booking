@@ -12,19 +12,19 @@ describe("UserService", () => {
     userService = new UserService(fakeUserRepository);
   });
 
-  it("deve retornar null quando ID passado for inválido", async () => {
+  it("should return null when ID passed is invalid", async () => {
     const user = await userService.findUserById("999");
     expect(user).toBeNull();
   });
 
-  it("deve retornar um usuário quando o ID fornecido for válido", async () => {
+  it("should return a user when a valid ID is provided", async () => {
     const user = await userService.findUserById("1");
     expect(user?.getId()).toBe("1");
     expect(user?.getName()).toBe("John Doe");
     expect(user).not.toBeNull();
   });
 
-  it("deve salvar um novo usuário com sucesso usando repositório fake e buscando novamente", async () => {
+  it("should save a new user successfully using fake repository and searching again", async () => {
     const newUser = new User("3", "Test Douglas")
     await fakeUserRepository.save(newUser)
 
