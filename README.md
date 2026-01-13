@@ -4,17 +4,25 @@ Projeto de exemplo para reservas (booking) com TypeScript, testes com Jest e foc
 
 ## Requisitos
 
+- Git instalado
 - Node.js e npm instalados
 
 ## Como executar
 
-1) Instale as dependências:
+1) Clone o repositório:
+
+```bash
+git clone https://github.com/douglashugo/tdd-booking.git
+cd tdd-booking
+```
+
+2) Instale as dependências:
 
 ```bash
 npm install
 ```
 
-2) Execute os testes:
+3) Execute os testes:
 
 ```bash
 npm test
