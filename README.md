@@ -8,7 +8,7 @@ Projeto de exemplo para reservas (booking) com TypeScript, testes com Jest e foc
 
 ## Como executar
 
-1) Instale as dependencias:
+1) Instale as dependências:
 
 ```bash
 npm install
@@ -20,12 +20,8 @@ npm install
 npm test
 ```
 
-## Estrutura basica
+## Estrutura básica
 
-- `src/domain`: entidades, value objects e regras de negocio
-- `src/application`: servicos e DTOs
-- `src/infrastructure`: persistencia, repositorios e controllers
-
-## Observacoes
-
-- Nao ha um servidor ou CLI configurado por padrao; os testes exercitam a aplicacao.
+- `src/domain`: entidades, value objects e regras de negócio
+- `src/application`: serviços e DTOs
+- `src/infrastructure`: persistência, repositórios e controllers
