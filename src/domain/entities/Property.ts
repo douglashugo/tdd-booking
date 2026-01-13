@@ -19,6 +19,9 @@ export class Property {
     if (maxGuests <= 0) {
       throw new Error('Max guests must be greater than zero');
     }
+    if (basePricePerNight == null || basePricePerNight <= 0) {
+      throw new Error('Base price per night must be greater than zero');
+    }
 
     this.id = id;
     this.name = name;

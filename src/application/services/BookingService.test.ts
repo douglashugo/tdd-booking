@@ -181,4 +181,10 @@ describe("BookingService", () => {
     
   });
 
+  it("should return error when trying to cancel a booking that does not exist", async () => {
+    await expect(bookingService.cancelBooking("999")).rejects.toThrow(
+      "Booking not found."
+    );
+  });
+
 });
