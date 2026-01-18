@@ -59,7 +59,7 @@ export class BookingController {
     } catch (error: any) {
       return res
         .status(400)
-        .json({ message: "Booking not found" });
+        .json({ message: "Booking not found." });
     }
   } 
 }
