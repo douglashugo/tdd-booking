@@ -25,7 +25,7 @@ npm install
 3) Execute os testes:
 
 ```bash
-npm test
+npm run test
 ```
 
 ## Estrutura básica
